@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>نظام الطباعة المتكامل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #4a90e2; 
+            --secondary: #2ecc71; 
+            --purple: #9b59b6;
+            --dark: #34495e;
+            --bg: #f5f7fa; 
+            --text: #2c3e50; 
+            --danger: #e74c3c;
+        }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); color: var(--text); padding: 15px; margin: 0; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 500px; }
+        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 15px; }
+        h3 { margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 8px; font-size: 18px; color: var(--dark); }
+        .status-badge { display: block; text-align: center; padding: 8px; border-radius: 8px; background: #eee; margin-bottom: 15px; font-weight: bold; font-size: 14px; }
+        .online { background: #d4edda; color: #155724; }
+        
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; box-sizing: border-box; margin-bottom: 10px; }
+        .btn-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; color: white; margin-bottom: 5px; }
+        button:active { transform: scale(0.98); }
+        
+        .btn-blue { background: var(--primary); }
+        .btn-green { background: var(--secondary); }
+        .btn-purple { background: var(--purple); }
+        .btn-dark { background: var(--dark); }
+        .btn-red { background: var(--danger); }
+    </style>
+  <script type="module" crossorigin src="/assets/index-BDXxF5H4.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div id="status" class="status-badge">الحالة: غير متصل ⚪</div>
+
+    <div class="card">
+        <h3>1. إعدادات الاتصال</h3>
+        
+        <input type="text" id="ipInput" placeholder="عنوان IP الطابعة (WiFi)">
+        <button class="btn-blue" onclick="connectWifi()">ربط WiFi</button>
+        
+        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
+        
+        <button class="btn-purple" onclick="listBT()">بحث عن أجهزة Bluetooth</button>
+        <select id="btSelect">
+            <option value="">اختر طابعة بلوتوث...</option>
+        </select>
+        <button class="btn-blue" onclick="connectBT()">ربط Bluetooth</button>
+        
+        <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
+        
+        <button class="btn-dark" onclick="connectUsb()">اتصال USB مباشر</button>
+    </div>
+
+    <div class="card">
+        <h3>2. تفاصيل الفاتورة</h3>
+        <p style="margin-bottom: 5px; font-size: 14px;">محتوى الفاتورة:</p>
+        <textarea id="invoiceContent" rows="8" placeholder="مثال:
+جبنة رومي ... 50
+لانشون ... 30
+----------------
+الإجمالي ... 80"></textarea>
+    </div>
+
+    <div class="card">
+        <button class="btn-green" style="font-size: 20px; padding: 15px;" onclick="printBill()">طـبـاعـة الـفـاتـورة 🖨️</button>
+        <img id="debugPreview" style="width: 100%; border: 2px solid red; display: none; margin-top: 10px;" /> 
+        <button style="background-color: black; color: white; margin-top: 10px;" onclick="runTest()">⚫ اختبار الهاردوير (مربع أسود)</button>
+        <button style="background-color: orange; color: white; margin-top: 5px;" onclick="testTextPrint()">📝 اختبار تنسيق النص</button>
+        
+        <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+
+        <div class="btn-row">
+            <button class="btn-red" onclick="clearBill()">مسح الفاتورة</button>
+            <button class="btn-dark" onclick="disconnect()">قطع الاتصال</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
